@@ -1,0 +1,57 @@
+/* Start Adjust Main Layout */
+
+html, body, .body {
+    height: 100%;
+}
+
+.navbar-dark.bg-primary {
+    background-color: #212121 !important;
+}
+
+.wrapper-all {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper-all .content {
+    flex: 1 0 auto;
+}
+
+.wrapper-all footer {
+    flex-shrink: 0;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        min-width: 1180px;
+    }
+}
+
+/* End Adjust Main Layout */
+
+/* Start Helper */
+
+.text-decoration-none,
+.text-decoration-none:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.full-width {
+    width: 100% !important;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+/* End Helper */
+
+/* Start adjust some bootstrap */
+
+.alert.alert-topic h4.topic {
+    margin-bottom: 0;
+} 
+
+/* End adjust some bootstrap */

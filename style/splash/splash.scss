@@ -1,0 +1,636 @@
+@import 'engine.scss';
+
+@include font-face('LemonMilk', 'font-style/LemonMilk' , 500 , normal , otf);
+@include font-face('CaviarDreams', 'font-style/CaviarDreams' , 0 , null , ttf);
+
+.splash {
+
+
+    // static props[splash]
+    position : relative;
+    width : 100vw;
+    height : 100vh;
+    @include zero-mp;
+    overflow: hidden;
+    // dynamic props[splash]
+
+
+    // elements[splash]
+
+    > .header {
+
+        // static props[splash > header]
+        z-index: z('outdated-browser');
+        width : 100vw;
+        position: absolute;
+        top : 0;
+        @include zero-mp;
+        display : flex;
+        align-items: center;
+        justify-content: flex-end;
+        
+
+        // dynamic props[splash > header]
+
+        @include responsive-mq('phone-small') {
+            height : 10vh;
+        }
+
+        @include responsive-mq('phone') {
+
+            height : 10vh;
+            
+        }
+
+
+        @include responsive-mq('phone-wide') {
+
+            height : 10vh;
+            
+        }
+
+        @include responsive-mq('tablet-small') {
+
+            height : 10vh;
+            
+        }
+
+        @include responsive-mq('tablet') {
+
+            height : 10vh;
+            
+        }
+
+        @include responsive-mq('tablet-wide') {
+
+            height : 10vh;
+            
+        }
+
+        @include responsive-mq('desktop') {
+            height : 10vh;
+        }
+
+        @include responsive-mq('desktop-wide') {
+            height : 15vh;
+        }
+
+
+
+        // variants[splash > header]
+
+    }
+
+    > .header > .icon {
+
+
+        // static props[splash > header > icon]
+
+        overflow: hidden;
+        background : url('./image-style/plus-one-logo.png') no-repeat;
+        background-size : 100% 100%;
+        transform: translateX(-200px);
+        animation : iconAnim 0.8s cubic-bezier(.76,.39,.32,.91) forwards;
+        margin-right: auto;
+
+        // dynamic props[splash > header > icon]
+
+
+        @include responsive-mq('phone-small') {
+            width : 64px;
+            height : 64px;
+        }
+
+        @include responsive-mq('phone') {
+
+            width : 64px;
+            height : 64px;
+            
+        }
+
+        @include responsive-mq('phone-wide') {
+            
+            width : 64px;
+            height : 64px;
+            
+        }
+
+
+        @include responsive-mq('tablet-small') {
+
+            width : 86px;
+            height : 86px;
+            
+        }
+
+        @include responsive-mq('tablet') {
+
+            width : 86px;
+            height : 86px;
+            
+        }
+
+
+        @include responsive-mq('tablet-wide') {
+
+            width : 86px;
+            height : 86px;
+            
+        }
+
+
+        @include responsive-mq('desktop') {
+
+            width : 86px;
+            height : 86px;
+
+        }
+
+        @include responsive-mq('desktop-wide') {
+
+            width : 128px;
+            height : 128px;
+            
+        }
+    }
+
+    > .background {
+
+        // static props[splash > background]
+        z-index: z('site-footer');
+        width : 100%;
+        height : 100%;
+        position: relative;
+        @include zero-mp;
+        overflow: hidden;
+
+        // dynamic props[splash > background]
+        
+
+        // variants[splash > background]
+        &.-image {
+
+            // static props[variants splash -image]
+            background-color : rgba(99, 110, 114,1.0);
+            width : 100%;
+            height : 100%;
+
+            @include responsive-mq('phone-small') {
+                background : url('./image-style/splash-background-phone.jpg');
+                background-size : cover;
+                background-position-x: 50%;
+            }
+
+            @include responsive-mq('phone') {
+
+                background : url('./image-style/splash-background-phone.jpg');
+                background-size : cover;
+                background-position-x: 50%;
+
+            }
+
+            @include responsive-mq('phone-wide') {
+
+                background : url('./image-style/splash-background-phone.jpg');
+                background-size : cover;
+                background-position-x: 50%;
+                
+            }
+
+            @include responsive-mq('tablet-small') {
+                background : url('./image-style/splash-background.jpg');
+                background-size : cover;
+                background-position-x: 50%;
+            }
+
+            @include responsive-mq('tablet') {
+
+                background : url('./image-style/splash-background.jpg');
+                background-size : cover;
+                background-position-x: 50%;
+
+            }
+
+            @include responsive-mq('tablet-wide') {
+
+                background : url('./image-style/splash-background.jpg');
+                background-size : cover;
+                background-position-x: 50%;
+
+            }
+    
+            @include responsive-mq('desktop') {
+                background : url('./image-style/splash-background.jpg') no-repeat;
+                background-size : 100% 100%;
+            }
+    
+            @include responsive-mq('desktop-wide') {
+    
+                background : url('./image-style/splash-background.jpg') no-repeat;
+                background-size : 100% 100%;
+    
+            }
+            
+        }
+    
+        &.-color {
+            content : "";
+        }
+
+    }
+
+    > .background > .cover { background-color : rgba(47, 54, 64,0.7); position: absolute; z-index : z('modal'); width : 100%; height : 100%; }
+
+    > .content-box {
+
+        // static props[splash > content-box]3
+        width : 100%;
+        z-index: z('modal');
+        display : flex;
+        overflow : hidden;
+        ///border : 1px solid aqua;
+        justify-content: center;
+        position: absolute;
+        // dynamic props[splash > content-box]
+
+
+        // variants[splash > content-box]
+
+        &.-s3size { height : 10%; }
+        &.-s2size { height : 20%; }
+        &.-ssize { height : 30%; }
+        &.-msize { height : 40%; }
+        &.-lsize { height : 60%; }
+        &.-xlsize { height : 70%; }
+        
+        &.-flexstart { align-items: flex-start; }
+        &.-flexend { align-items: flex-end; }
+
+        &.-tops { top : 30%; }
+        &.-topm { top : 40%; }
+        &.-tophalf { top : 50%; }
+        &.-topl { top : 60%; }
+        &.-topxl { top : 70%; }
+        
+        
+        
+    }
+
+    > .content-box > .title {
+
+        // static props[splash > content-box > title]
+        font-family: LemonMilk;
+        color : rgba(245, 246, 250,1.0);
+        @include user-select();
+        text-overflow: ellipsis;
+        ///border : 1px solid red;
+        // dynamic props[splash > content-box > title]
+
+        @include responsive-mq('phone-small') {
+            width : 50%;
+            height : auto;
+            text-align: center;
+            @include text-shadow();
+            font-size : 1.5em;
+
+            transform: translateY(-30%);
+
+        }
+
+        @include responsive-mq('phone') {
+            width : 50%;
+            height : auto;
+            text-align: center;
+            @include text-shadow();
+            font-size : 1.5em;
+
+            transform: translateY(-30%);
+
+            
+        }
+
+
+        @include responsive-mq('phone-wide') {
+            width : 50%;
+            height : auto;
+            text-align: center;
+            @include text-shadow();
+            font-size : 1.5em;
+
+            transform: translateY(-30%);
+
+            
+        }
+
+        @include responsive-mq('tablet-small') {
+            width : 50%;
+            height : auto;
+            text-align: center;
+            @include text-shadow();
+            font-size : 2.5em;
+
+            transform: translateY(-30%);
+
+        }
+
+        @include responsive-mq('tablet') {
+            width : 50%;
+            height : auto;
+            text-align: center;
+            @include text-shadow();
+            font-size : 2.8em;
+
+            transform: translateY(-30%);
+            
+        }
+
+        @include responsive-mq('tablet-wide') {
+            width : 50%;
+            height : auto;
+            text-align: center;
+            @include text-shadow();
+            font-size : 3.5em;
+
+            transform: translateY(-30%);
+            
+        }
+
+        @include responsive-mq('desktop') {
+            width : 50%;
+            height : auto;
+            text-align: center;
+            @include text-shadow();
+            font-size : 5em;
+            transform: translateY(110%);
+            animation : titleAnim 0.8s cubic-bezier(.76,.39,.32,.91) forwards;
+        }
+        
+        @include responsive-mq('desktop-wide') {
+
+            width : 50%;
+            height : auto;
+            text-align: center;
+            @include text-shadow();
+            font-size : 5.5em;
+            transform: translateY(110%);
+            animation : titleAnim 0.8s cubic-bezier(.76,.39,.32,.91) forwards;
+            
+        }
+
+        // variants[splash > content-box > title]
+        // Extensions
+
+    }
+
+    > .content-box > .sub-title {
+
+        // static props[splash > content-box > sub-title]
+
+        font-family: CaviarDreams;
+        color : rgba(245, 246, 250,1.0);
+        @include user-select();
+        text-overflow: ellipsis;
+        text-align: center;
+        height : auto;
+        @include text-shadow();
+        ///border : 1px solid red;
+ 
+        // dynamic props[splash > content-box > sub-title]
+
+        @include responsive-mq('phone-small') {
+            
+            font-size : 1.2em;
+            transform: translateY(50%);
+            
+        }
+
+        @include responsive-mq('phone') {
+            
+            font-size : 1.2em;
+            transform: translateY(50%);
+
+        }
+
+        @include responsive-mq('phone-wide') {
+
+            font-size : 1.2em;
+            transform: translateY(50%);
+            
+        }
+
+        @include responsive-mq('tablet-small') {
+
+            font-size : 1.5em;
+            transform: translateY(50%);
+
+        }
+
+        @include responsive-mq('tablet') {
+
+            font-size : 1.8em;
+            transform: translateY(50%);
+            
+        }
+
+        @include responsive-mq('tablet-wide') {
+
+            font-size : 2em;
+            transform: translateY(50%);
+            
+        }
+        
+        @include responsive-mq('desktop') {
+            width : 50%;
+
+            font-size : 2.5em;
+            transform: translateY(-110%);
+            animation : subTitleAnim 0.8s cubic-bezier(.76,.39,.32,.91) 0.8s forwards;
+            
+        }
+        
+        @include responsive-mq('desktop-wide') {
+
+            width : 50%;
+     
+            font-size : 2.8em;
+            transform: translateY(-110%);
+            animation : subTitleAnim 0.8s cubic-bezier(.76,.39,.32,.91) 0.8s forwards;
+            
+        }
+
+
+    }
+
+    > .content-box > .button {
+
+        // static props[splash > content-box > button]
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        @include user-select();
+        text-align: center;
+        cursor : pointer;
+        font-family: LemonMilk;
+        
+        // dynamic props[splash > content-box > button]
+
+        @include responsive-mq('phone-small') {
+
+            width : 120px;
+            height : 30px;
+            line-height : 30px;
+            @include border-radius(15px);
+            font-size : 0.8em;
+
+        }
+
+        @include responsive-mq('phone') {
+
+            width : 120px;
+            height : 30px;
+            line-height : 30px;
+            @include border-radius(15px);
+            font-size : 0.8em;
+
+        }
+
+        @include responsive-mq('phone-wide') {
+
+            width : 130px;
+            height : 30px;
+            line-height : 30px;
+            @include border-radius(15px);
+            font-size : 0.8em;
+            
+        }
+
+        @include responsive-mq('tablet-small') {
+
+            width : 140px;
+            height : 40px;
+            line-height : 40px;
+            @include border-radius(20px);
+            font-size : 1em;
+
+        }
+
+        @include responsive-mq('tablet') {
+
+            width : 140px;
+            height : 40px;
+            line-height : 40px;
+            @include border-radius(20px);
+            font-size : 1em;
+            
+        }
+
+        @include responsive-mq('tablet-wide') {
+
+            width : 140px;
+            height : 40px;
+            line-height : 40px;
+            @include border-radius(20px);
+            font-size : 1em;
+            
+        }
+
+
+        @include responsive-mq('desktop') {
+            width : 150px;
+            height : 40px;
+            line-height : 40px;
+            @include border-radius(25px);
+            transform: translateY(110%);
+            animation : buttonAnim 0.8s cubic-bezier(.76,.39,.32,.91) 1.4s forwards;
+        }
+
+        @include responsive-mq('desktop-wide') {
+            width : 170px;
+            height : 50px;
+            line-height : 50px;
+            @include border-radius(25px);
+            transform: translateY(110%);
+            animation : buttonAnim 0.8s cubic-bezier(.76,.39,.32,.91) 1.4s forwards;
+        }
+        
+
+
+        // variants[splash > content-box > button] 
+
+        &.-chigong { 
+            border : 0.5px solid rgba(214, 48, 49,1.0); 
+            color : rgba(214, 48, 49,1.0);
+            transition : all 0.3s cubic-bezier(.76,.39,.32,.91);
+
+            &:hover {
+                background-color : rgba(214, 48, 49,1.0);
+                color : white;
+            }
+        }
+
+        &.-alizarin {
+            border : 0.5px solid rgba(231, 76, 60,1.0);
+            color : rgba(231, 76, 60,1.0);
+            transition : all 0.3s cubic-bezier(.76,.39,.32,.91);
+
+            &:hover {
+                background-color : rgba(231, 76, 60,1.0);
+                color : white;
+            }
+        }
+
+        
+
+    }
+
+
+}
+
+@include keyframes(iconAnim) {
+
+    from {
+        transform: translateX(-200px);
+    }
+
+    to {
+        transform: translateX(10px);
+    }
+
+}
+
+
+@include keyframes(titleAnim) {
+
+    from {
+        transform: translateY(110%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+
+}
+
+@include keyframes(subTitleAnim) {
+
+    from {
+        transform: translateY(-110%);
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+
+}
+
+@include keyframes(buttonAnim) {
+
+    from {
+        transform: translateY(110%);
+    }
+
+    to {
+        transform : translateY(0);
+    }
+
+}

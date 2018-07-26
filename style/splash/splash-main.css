@@ -1,0 +1,29 @@
+.splash-main {
+    text-align: center;
+  }
+  
+  .splash-main-logo {
+    animation: splash-main-logo-spin infinite 20s linear;
+    height: 80px;
+  }
+  
+  .splash-main-header {
+    background-color: #222;
+    height: 150px;
+    padding: 20px;
+    color: white;
+  }
+  
+  .splash-main-title {
+    font-size: 1.5em;
+  }
+  
+  .splash-main-intro {
+    font-size: large;
+  }
+  
+  @keyframes splash-main-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  

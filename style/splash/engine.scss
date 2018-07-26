@@ -1,0 +1,467 @@
+/* 
+    PlusOne web stylesheet 2018 
+    Develop by Gunz[2]Pixel
+*/
+
+// css3 - Prefix
+/// @param {*} $prop Property
+/// @param {*} $value Value
+
+@mixin css3-prefix($prop , $value) {
+    -webkit-#{$prop} : #{$value};
+    -khtml-#{$prop} : #{$value};
+    -moz-#{$prop} : #{$value};
+    -ms-#{$prop} : #{$value};
+    -o-#{$prop} : #{$value};
+    #{$prop} : #{$value};
+}
+
+/// Push-Auto
+
+@mixin push-auto {
+    margin : {
+        left : auto;
+        right : auto;
+    }
+}
+
+/// Pseudo
+
+@mixin pseudo($display : block , $pos : absolute , $content : '') {
+    content : $content;
+    display : $display;
+    position : $pos;
+}
+
+/// Responsive
+
+$breakpoints : (
+    "phone-small" : 320px,
+    "phone" : 400px,
+    "phone-wide" : 480px,
+    "phblet" : 560px,
+    "tablet-small" : 640px,
+    "tablet" : 768px,
+    "tablet-wide" : 1024px,
+    "desktop" : 1248px,
+    "desktop-wide" : 1440px,
+);
+
+/// @param {Size} $width Width device
+/// @param {*} $type Max or min (Default : min)
+
+@mixin responsive-mq($width , $type : min) {
+    
+    @if map-has-key($breakpoints , $width) {
+        $width : map-get($breakpoints , $width);
+        @if $type == max {
+            $width : $width - 1px;
+        }
+
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+
+    }
+
+}
+
+@mixin responsive-ratio($x,$y, $pseudo: false) {
+    $padding: unquote( ( $y / $x ) * 100 + '%' );
+    @if $pseudo {
+        &:before {
+            @include pseudo($pos: relative);
+            width: 100%;
+            padding-top: $padding;
+        }
+    } @else {
+        padding-top: $padding;
+    }
+}
+
+
+/// Background-Size
+/// @param {Size} $width Background Width [Default : 100%]
+/// @param {Size} $height Background Height [Default : width]
+/// @require {mixin} css3-prefix 
+
+@mixin background-size($width : 100% , $height : $width) {
+    @if type-of($width) == 'number' and $height != null {
+        @include css3-prefix('background-size', $width $height);
+    } @else {
+        @include css3-prefix('background-size', $width);
+    }
+}
+
+
+
+/// Border-Radius
+/// @param {Size} $radius [Default : 5px]
+/// @require {mixin} css3-prefix 
+
+@mixin border-radius($radius : 5px) {
+    @include css3-prefix('border-radius', $radius);
+}
+
+
+
+/// Box Shadow
+/// @param {Size} $x [2px] - X
+/// @param {Size} $y [2px] - Y
+/// @param {Size} $blur [5px] - Blur
+/// @param {Color} $color [rgba(0,0,0,.4)] - Color
+/// @param {Boolean} $inset - Inset
+
+@mixin box-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4), $inset: "") {
+    @if ($inset != "") {
+      @include css3-prefix('box-shadow', $inset $x $y $blur $color);
+    } @else {
+      @include css3-prefix('box-shadow', $x $y $blur $color);
+    }
+}
+
+
+
+
+/// Opacity
+/// @param {Double} $opacity [0.5] - Opacity
+/// @require {mixin} css3-prefix
+
+@mixin opacity($opacity: 0.5) {
+    $opacityMultiplied: ($opacity * 100);
+
+    filter:         alpha(opacity=$opacityMultiplied);
+    -ms-filter:     "progid:DXImageTransform.Microsoft.Alpha(Opacity=" + $opacityMultiplied + ")";
+    @include css3-prefix('opacity', $opacity);
+}
+
+
+
+
+/// Text Shadow
+/// @param {Size} $x [2px] - X
+/// @param {Size} $y [2px] - Y
+/// @param {Size} $blur [2px] - Blur
+/// @param {Color} $color [rgba(0,0,0,.4)] - Color
+
+@mixin text-shadow($x: 2px, $y: 2px, $blur: 5px, $color: rgba(0,0,0,.4)) {
+    text-shadow: $x $y $blur $color;
+}
+
+/// Font Face
+/// @param {*} $name NameFont
+/// @param {*} $path Path Folder
+/// @param {Size} $weight Font Weight[Default : null]
+/// @param {*} $style Style Font[Default : null]
+/// @param {*} $exts extensions 
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+
+	$extmods: (
+		eot: "?",
+		svg: "#" + str-replace($name, " ", "_")
+	);
+
+	$formats: (
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}
+
+
+
+/// Rotate
+///
+/// CSS Matrix Rotation Calculator http://www.boogdesign.com/examples/transforms/matrix-calculator.html
+/// @param {Double} $deg [0] - Degree
+/// @param {Double} $m11 [0] - M11
+/// @param {Double} $m12 [0] - M12
+/// @param {Double} $m21 [0] - M21
+/// @param {Double} $m22 [0] - M22
+/// @require {mixin} css3-prefix
+
+@mixin rotate($deg: 0, $m11: 0, $m12: 0, $m21: 0, $m22: 0) {
+    @include css3-prefix('transform', rotate($deg + deg));
+    filter: progid:DXImageTransform.Microsoft.Matrix(
+         M11=#{$m11}, M12=#{$m12}, M21=#{$m21}, M22=#{$m22}, sizingMethod='auto expand');
+      zoom: 1;
+  }
+  
+
+/// User-Select
+/// @param {List} $params - Params
+
+@mixin user-select($params : none) {
+    @include css3-prefix('user-select',$params);
+}
+
+
+/// Transform
+/// @param {List} $params - Params
+/// @require {mixin} css3-prefix
+
+@mixin transform($params) {
+  @include css3-prefix('transform', $params);
+}
+
+
+
+/// Transform-Origin
+/// @param {List} $params - Params
+/// @require {mixin} css3-prefix
+
+@mixin transform-origin($params) {
+    @include css3-prefix('transform-origin', $params);
+}
+  
+  
+  // Transform-Style
+  /// @param {List} $params - Params
+  /// @require {mixin} css3-prefix
+  
+@mixin transform-style($style: preserve-3d) {
+    @include css3-prefix('transform-style', $style);
+}
+  
+  /// Transition
+  /// @param {List} $properties - Properties
+  /// @require {mixin} css3-prefix
+  
+@mixin transition($properties...) {
+  
+    @if length($properties) >= 1 {
+      @include css3-prefix('transition', $properties);
+    }
+  
+    @else {
+      @include css3-prefix('transition',  "all 0.2s ease-in-out 0s");
+    }
+}
+  
+  
+  /// Triple Borders
+  /// @param {Color} $colorOne [#3C3C3C] - Color One
+  /// @param {Color} $colorTwo [#999999] - Color Two
+  /// @param {Color} $colorThree [#000000] - Color Three
+  /// @param {Size} $radius [0] - Radius
+  /// @require {mixin} border-radius
+  /// @require {mixin} css3-prefix
+  
+  @mixin triple-borders($colorOne: #3C3C3C, $colorTwo: #999999, $colorThree: #000000, $radius: 0) {
+      border: 1px solid $colorOne;
+  
+      @include border-radius($radius);
+  
+      @include css3-prefix('box-shadow', "0 0 0 1px #{$colorTwo}, 0 0 0 2px #{$colorThree}");
+  }
+  
+  
+  /// Keyframes
+  /// @param {*} $animation-name - Animation name
+  /// @content [Animation css]
+  
+  @mixin keyframes($animation-name) {
+    @-webkit-keyframes #{$animation-name} {
+      @content;
+    }
+    @-moz-keyframes #{$animation-name} {
+      @content;
+    }
+    @-ms-keyframes #{$animation-name} {
+      @content;
+    }
+    @-o-keyframes #{$animation-name} {
+      @content;
+    }
+    @keyframes #{$animation-name} {
+      @content;
+    }
+  }
+  
+  
+/// Animation
+/// @param {*} $str - name duration timing-function delay iteration-count direction fill-mode play-state ([http://www.w3schools.com/cssref/css3_pr_animation.asp](http://www.w3schools.com/cssref/css3_pr_animation.asp))
+/// @require {mixin} css3-prefix
+
+@mixin animation($str) {
+    @include css3-prefix('animation', $str);
+}
+
+
+@mixin zero-mp {
+    margin : 0;
+    padding : 0;
+}
+
+@function z($name) {
+    @if index($z-indexes, $name) {
+        @return (length($z-indexes) - index($z-indexes, $name)) + 1;
+    } @else {
+        @warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}';
+        @return null;
+    }
+}
+$z-indexes: (
+    "outdated-browser",
+    "modal",
+    "site-header",
+    "page-wrapper",
+    "site-footer"
+);
+
+
+/// Init Stylesheet Engine with Zero margin and padding
+.init-engine {
+    @include zero-mp;
+}
+
+/// Test Styles
+.splash-test {
+
+    @include responsive-mq('phone-small') {
+        width : 100vw;
+        height : 100vh;
+        background-color : #130f40;
+    }
+
+    @include responsive-mq('phone') {
+        width : 100vw;
+        height : 100vh;
+        background-color : #55efc4;
+    }
+
+    @include responsive-mq('phone-wide') {
+        width : 100vw;
+        height : 100vh;
+        background-color : #fdcb6e;
+    }
+
+    @include responsive-mq('phblet') {
+        width : 100vw;
+        height : 100vh;
+        background-color : #6c5ce7;
+    }
+
+    @include responsive-mq('tablet-small') {
+        width : 100vw;
+        height : 100vh;
+        background-color : #0984e3;
+    }
+
+    @include responsive-mq('tablet') {
+        width : 100vw;
+        height : 100vh;
+        background-color : #fd79a8;
+    }
+
+    @include responsive-mq('tablet-wide') {
+        width : 100vw;
+        height : 100vh;
+        background-color : #e17055;
+    }
+
+    @include responsive-mq('desktop') {
+        width : 100vw;
+        height : 100vh;
+        background-color : #d63031;
+    }
+
+    @include responsive-mq('desktop-wide') {
+        width : 100vw;
+        height : 100vh;
+        background-color : #2d3436;
+    }
+    text-align: center;
+    line-height : 80vh;
+
+}
+
+.text-test {
+
+    &::before {
+        @include responsive-mq('phone-small') {
+            content : "Phone";
+            color : white;
+            font-size : 1.5em;
+        }
+    }
+
+    &::before {
+        @include responsive-mq('phone') {
+            content : "Phone";
+            color : white;
+            font-size : 1.5em;
+        }
+    }
+
+    &::before {
+        @include responsive-mq('phone-wide') {
+            content : "Phone Wide";
+            color : white;
+            font-size : 2.5em;
+        }
+    }
+
+    &::before {
+        @include responsive-mq('phblet') {
+            content : "Phblet";
+            color : white;
+            font-size : 2.5em;
+        }
+    }
+
+    &::before {
+        @include responsive-mq('tablet-small') {
+            content : "Tablet Small";
+            color : white;
+            font-size : 3.5em;
+        }
+    }
+
+    &::before {
+        @include responsive-mq('tablet') {
+            content : "Tablet";
+            color : white;
+            font-size : 3.5em;
+        }
+    }
+
+    &::before {
+        @include responsive-mq('tablet-wide') {
+            content : "Tablet Wide";
+            color : white;
+            font-size : 3.5em;
+        }
+    }
+    
+    &::before {
+        @include responsive-mq('desktop') {
+            content : "Desktop";
+            color : white;
+            font-size : 7em;
+        }
+    }
+    &::before {
+        @include responsive-mq('desktop-wide') {
+            content : "Desktop Wide";
+            color : white;
+            font-size : 7em;
+            
+        }
+    }
+
+}
